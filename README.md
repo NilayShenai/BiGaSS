@@ -1,8 +1,8 @@
-# BiGaSS Sort (Bidirectional Gapping Swap Sort)
+# BiGaSS (Bidirectional Gapping Swap Sort)
 
 ## Overview
 
-BiGaSS Sort is a sorting algorithm that combines ideas from **Comb Sort** and **Cocktail Shaker Sort** to improve sorting efficiency. It uses **dynamic gap shrinking** and **bidirectional traversal** to rearrange elements, making it a good choice for small to medium sized datasets.
+BiGaSS is a sorting algorithm that combines ideas from **Comb Sort** and **Cocktail Shaker Sort** to improve sorting efficiency. It uses **dynamic gap shrinking** and **bidirectional traversal** to rearrange elements, making it a good choice for small to medium sized datasets.
 
 ## How It Works
 
@@ -57,6 +57,35 @@ BiGaSS Sort applies key concepts from:
 | Worst Case   | O(n²)           |
 
 **Space Complexity:** O(1) (no extra memory needed)
+
+## Algorithm
+
+```
+function bigass(array):
+    n = array length
+    gap = n
+    swapped = true
+
+    while gap > 1 or swapped:
+        gap = floor(gap * 10 / 13)
+        if gap < 1:
+            gap = 1
+        swapped = false
+
+        // forward pass
+        for i from 0 to (n - gap - 1):
+            if array[i] > array[i + gap]:
+                swap(array[i], array[i + gap])
+                swapped = true
+
+        // backward pass
+        for i from (n - 1) to gap:
+            if array[i - gap] > array[i]:
+                swap(array[i - gap], array[i])
+                swapped = true
+
+    return array
+```
 
 ## Example
 
